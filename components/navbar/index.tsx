@@ -6,7 +6,7 @@ import {
   useColorMode,
   useColorModeValue
 } from '@chakra-ui/react'
-import {MoonIcon, SunIcon} from '@chakra-ui/icons'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 const Navbar = () => {
   const { toggleColorMode } = useColorMode()
