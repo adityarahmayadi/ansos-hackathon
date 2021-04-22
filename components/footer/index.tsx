@@ -12,6 +12,7 @@ const Footer = () => (
     bottom={0}
     left={0}
     p={4}
+    boxShadow='sm'
   >
     <Text>Ansos © 2021 - Pinhackathon</Text>
   </Flex>
