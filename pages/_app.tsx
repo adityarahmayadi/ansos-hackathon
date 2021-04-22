@@ -1,6 +1,12 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import React from 'react'
 
-export default function App({ Component, pageProps }) {
+interface PageProps {
+  Component: any,
+  pageProps: any
+}
+
+export default function App({ Component, pageProps }: PageProps) {
   return (
     <ChakraProvider>
       <Component {...pageProps} />
