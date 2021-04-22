@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import Footer from '../../footer';
 import Navbar from '../../navbar';
+import Dropzone from 'react-dropzone'
 
 const DashboardPage = () => (
   <Flex 
@@ -30,7 +31,16 @@ const DashboardPage = () => (
     >
       <Text fontSize='24px' fontWeight='500' mb='32px'>Daftar Transaksi Pembelian Properti</Text>
       <Flex w='100%' alignItems='center' justifyContent='flex-end' mb={4}>
-        <Button colorScheme="teal">Upload SPR</Button>
+        <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+          {({getRootProps, getInputProps}) => (
+            <section>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <Button colorScheme="teal">Upload SPR</Button>
+              </div>
+            </section>
+          )}
+        </Dropzone>
       </Flex>
       <Flex width='100%' border='1px solid #d3d3d3' borderRadius='8px'>
         <Table variant="simple">
