@@ -1,12 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import React from 'react'
+import { AppProps } from 'next/app'
 
-interface PageProps {
-  Component: any,
-  pageProps: any
-}
-
-export default function App({ Component, pageProps }: PageProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <Component {...pageProps} />
