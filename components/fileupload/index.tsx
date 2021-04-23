@@ -14,11 +14,13 @@ import { BASE_URL } from '../../utils/constants'
 interface FileUploaderProps {
   isOpen: boolean,
   onClose(): void,
+  onSuccessUpload(): void,
 }
 
 const FileUploader = ({
   isOpen,
-  onClose
+  onClose,
+  onSuccessUpload,
 }: FileUploaderProps) => {
   const toast = useToast()
   const getUploadParams = ({ file }: any) => {
@@ -36,6 +38,8 @@ const FileUploader = ({
         status: "success",
         isClosable: true,
       })
+      onClose()
+      onSuccessUpload()
       remove()
     } else if (status === 'aborted') {
       toast({
@@ -45,6 +49,7 @@ const FileUploader = ({
         status: "error",
         isClosable: true,
       })
+      onClose()
     }
   }
 

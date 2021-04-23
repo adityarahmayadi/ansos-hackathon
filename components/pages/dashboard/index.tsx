@@ -16,11 +16,13 @@ import DetailDrawer from '../../drawer';
 import { AddIcon } from '@chakra-ui/icons';
 import FileUploader from '../../fileupload';
 import { useEffect, useState } from 'react';
+import { BASE_URL } from '../../../utils/constants'
 
-const DashboardPage = ({ data }: any) => {
+const DashboardPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
   const [detail, setDetail] = useState('')
+  const [list, setList] = useState([])
 
   const onClickDetail = (item: any) => () => {
     setDetail(item)
@@ -31,11 +33,29 @@ const DashboardPage = ({ data }: any) => {
     setDetail('')
   }
 
+  const onSuccessUpload = () => {
+    setTimeout(() => {
+      fetchData()
+    }, 500)
+  }
+
   useEffect(() => {
     if(detail){
       onOpenDrawer()
     }
   }, [detail])
+
+  const fetchData = async () => {
+    const res = await fetch(`${BASE_URL}/list`)
+    const data = await res.json()
+    const filteredData = data.filter((item: any) => item.identitas.nama)
+
+    setList(filteredData)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <Flex 
@@ -46,11 +66,11 @@ const DashboardPage = ({ data }: any) => {
       height='100vh'
     >
       <Navbar />
-      <FileUploader isOpen={isOpen} onClose={onClose}/>
+      <FileUploader isOpen={isOpen} onClose={onClose} onSuccessUpload={onSuccessUpload} />
       <Flex 
         width='100%'
         mt='120px'
-        padding='0px 240px'
+        padding='0px 240px 72px'
         direction='column'
       >
         <Text fontSize='24px' fontWeight='500' mb='32px'>Daftar Transaksi Pembelian Properti</Text>
@@ -64,7 +84,8 @@ const DashboardPage = ({ data }: any) => {
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th>Nomor</Th>
+                <Th>#</Th>
+                <Th>Nomor Surat</Th>
                 <Th>Nama</Th>
                 <Th>Nomor Telepon</Th>
                 <Th>Tipe</Th>
@@ -75,17 +96,23 @@ const DashboardPage = ({ data }: any) => {
             </Thead>
             <Tbody>
               {
-                data.map((item: any) => (
-                  <Tr key={item.id}>
-                    <Td>{item.developer.nomor_surat}</Td>
-                    <Td>{item.identitas.nama}</Td>
-                    <Td>{item.identitas.telpon}</Td>
-                    <Td>{item.unit.tipe}</Td>
-                    <Td>{item.price.cara_pembayaran}</Td>
-                    <Td>{item.developer.nama_developer}</Td>
-                    <Td><Button colorScheme="teal" onClick={onClickDetail(item)}>Lihat Detail</Button></Td>
-                  </Tr>
-                ))
+                list.length > 0 ? 
+                  list.map((item: any, index: number) => (
+                    <Tr key={item.id}>
+                      <Td>{index + 1}</Td>
+                      <Td>{item.developer.nomor_surat}</Td>
+                      <Td>{item.identitas.nama}</Td>
+                      <Td>{item.identitas.telpon}</Td>
+                      <Td>{item.unit.tipe}</Td>
+                      <Td>{item.price.cara_pembayaran}</Td>
+                      <Td>{item.developer.nama_developer}</Td>
+                      <Td><Button colorScheme="teal" onClick={onClickDetail(item)}>Lihat Detail</Button></Td>
+                    </Tr>
+                  )) : (
+                    <Flex width='100%' p={8} alignItems='center' justifyContent='center'>
+                      Please Wait
+                    </Flex>
+                  )
               }
             </Tbody>
           </Table>

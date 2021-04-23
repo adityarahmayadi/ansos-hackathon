@@ -11,11 +11,14 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 const Navbar = () => {
   const { toggleColorMode } = useColorMode()
   const toggleIcon = useColorModeValue(<MoonIcon />, <SunIcon />)
+  const backgroundNavbar = useColorModeValue('gray.50', 'gray.700')
   return (
     <Flex 
       width='100vw'
       position='fixed'
       boxShadow='sm'
+      backgroundColor={backgroundNavbar}
+      zIndex='1000'
     >
       <Flex 
         direction='row'
