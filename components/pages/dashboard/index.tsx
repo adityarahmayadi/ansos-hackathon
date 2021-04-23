@@ -16,9 +16,11 @@ import DetailDrawer from '../../drawer';
 import { AddIcon } from '@chakra-ui/icons';
 import FileUploader from '../../fileupload';
 
-const DashboardPage = () => {
+const DashboardPage = ({ data }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
+
+  console.log({ data })
 
   return (
     <Flex 
