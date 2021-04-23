@@ -11,12 +11,13 @@ export async function getStaticProps() {
   // You can use any data fetching library
   const res = await fetch(`${BASE_URL}/list`)
   const data = await res.json()
+  const filteredData = data.filter((item: any) => item.identitas.nama)
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
     props: {
-      data,
+      data: filteredData,
     },
   }
 }

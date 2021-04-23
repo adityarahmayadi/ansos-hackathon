@@ -20,8 +20,6 @@ const DashboardPage = ({ data }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
 
-  console.log({ data })
-
   return (
     <Flex 
       width='100vw'
@@ -60,14 +58,14 @@ const DashboardPage = ({ data }: any) => {
             </Thead>
             <Tbody>
               {
-                [1,2,3,4,5].map(item => (
-                  <Tr key={item}>
-                    <Td>SPR/05718/GRIN/B307</Td>
-                    <Td>Hasya Alfina</Td>
-                    <Td>081244232311</Td>
-                    <Td>70 B3/07</Td>
-                    <Td>Kas Bertahap</Td>
-                    <Td>Pin Properti</Td>
+                data.map((item: any) => (
+                  <Tr key={item.id}>
+                    <Td>{item.developer.nomor_surat}</Td>
+                    <Td>{item.identitas.nama}</Td>
+                    <Td>{item.identitas.telpon}</Td>
+                    <Td>{item.unit.tipe}</Td>
+                    <Td>{item.price.cara_pembayaran}</Td>
+                    <Td>{item.developer.nama_developer}</Td>
                     <Td><Button colorScheme="teal" onClick={onOpenDrawer}>Lihat Detail</Button></Td>
                   </Tr>
                 ))

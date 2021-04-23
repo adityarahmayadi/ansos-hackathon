@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Flex,
+  useToast
 } from "@chakra-ui/react"
 import Dropzone from 'react-dropzone-uploader'
 import { BASE_URL } from '../../utils/constants'
@@ -19,7 +20,7 @@ const FileUploader = ({
   isOpen,
   onClose
 }: FileUploaderProps) => {
-
+  const toast = useToast()
   const getUploadParams = ({ file }: any) => {
     const body = new FormData();
     body.append('image', file);
@@ -28,10 +29,22 @@ const FileUploader = ({
 
   const handleChangeStatus = ({ meta, remove }: any, status: any) => {
     if (status === 'headers_received') {
-      alert(`${meta.name} uploaded!`)
+      toast({
+        title: `${meta.name} uploaded`,
+        description: "We've receive your SPR",
+        position: 'top',
+        status: "success",
+        isClosable: true,
+      })
       remove()
     } else if (status === 'aborted') {
-      alert(`${meta.name}, upload failed...`)
+      toast({
+        title: `${meta.name} failed to upload`,
+        description: "Sorry we couldn't receive the file",
+        position: 'top',
+        status: "error",
+        isClosable: true,
+      })
     }
   }
 
