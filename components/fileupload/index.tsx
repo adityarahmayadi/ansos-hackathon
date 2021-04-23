@@ -8,6 +8,7 @@ import {
   Flex,
 } from "@chakra-ui/react"
 import Dropzone from 'react-dropzone-uploader'
+import { BASE_URL } from '../../utils/constants'
 
 interface FileUploaderProps {
   isOpen: boolean,
@@ -21,9 +22,8 @@ const FileUploader = ({
 
   const getUploadParams = ({ file }: any) => {
     const body = new FormData();
-    // file.name = file.name.split(' ').join('_').toLowerCase()
     body.append('image', file);
-    return { url: 'https://200f66adafe8.ngrok.io/upload', body }
+    return { url: `${BASE_URL}/upload`, body }
   }
 
   const handleChangeStatus = ({ meta, remove }: any, status: any) => {

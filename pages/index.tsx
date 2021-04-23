@@ -1,4 +1,5 @@
 import Dashboard from '../components/pages/dashboard'
+import { BASE_URL } from '../utils/constants'
 
 const Page = ({ data }: any) => (
   <Dashboard data={data} />
@@ -8,7 +9,7 @@ const Page = ({ data }: any) => (
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch('https://200f66adafe8.ngrok.io/list')
+  const res = await fetch(`${BASE_URL}/list`)
   const data = await res.json()
 
   // By returning { props: { posts } }, the Blog component
