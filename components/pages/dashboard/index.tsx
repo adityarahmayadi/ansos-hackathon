@@ -15,10 +15,27 @@ import Navbar from '../../navbar';
 import DetailDrawer from '../../drawer';
 import { AddIcon } from '@chakra-ui/icons';
 import FileUploader from '../../fileupload';
+import { useEffect, useState } from 'react';
 
 const DashboardPage = ({ data }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isDrawerOpen, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
+  const [detail, setDetail] = useState('')
+
+  const onClickDetail = (item: any) => () => {
+    setDetail(item)
+  }
+
+  const closeDrawer = () => {
+    onCloseDrawer();
+    setDetail('')
+  }
+
+  useEffect(() => {
+    if(detail){
+      onOpenDrawer()
+    }
+  }, [detail])
 
   return (
     <Flex 
@@ -66,7 +83,7 @@ const DashboardPage = ({ data }: any) => {
                     <Td>{item.unit.tipe}</Td>
                     <Td>{item.price.cara_pembayaran}</Td>
                     <Td>{item.developer.nama_developer}</Td>
-                    <Td><Button colorScheme="teal" onClick={onOpenDrawer}>Lihat Detail</Button></Td>
+                    <Td><Button colorScheme="teal" onClick={onClickDetail(item)}>Lihat Detail</Button></Td>
                   </Tr>
                 ))
               }
@@ -74,7 +91,7 @@ const DashboardPage = ({ data }: any) => {
           </Table>
         </Flex>
       </Flex>
-      <DetailDrawer onClose={onCloseDrawer} isOpen={isDrawerOpen} />
+      <DetailDrawer onClose={closeDrawer} isOpen={isDrawerOpen} spr={detail}/>
       <Footer />
     </Flex>
   )

@@ -13,9 +13,10 @@ import {
 interface DetailDrawerProps {
   isOpen: boolean,
   onClose(): void,
+  spr: any,
 }
 
-const DetailDrawer = ({ isOpen, onClose }: DetailDrawerProps) => {
+const DetailDrawer = ({ isOpen, onClose, spr }: DetailDrawerProps) => {
   return(
     <Drawer
       isOpen={isOpen}
@@ -27,79 +28,83 @@ const DetailDrawer = ({ isOpen, onClose }: DetailDrawerProps) => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Detail Transaksi</DrawerHeader>
-          <DrawerBody>
-            <Stack spacing={8}>
-              <Flex direction='column'>
-                <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Identitas Pembeli</Text>
-                <Text fontSize='14px' mb='8px'>
-                  Nama: Hasya
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Email: ansos@lala.com
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Alamat: Hasya
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  No KTP: Hasya
-                </Text>
-              </Flex>
+          {
+            spr && (
+              <DrawerBody>
+                <Stack spacing={8}>
+                  <Flex direction='column'>
+                    <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Identitas Pembeli</Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Nama: {spr.identitas.nama}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Email: {spr.identitas.email}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Alamat: {spr.identitas.alamat}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      No KTP: {spr.identitas.no_ktp}
+                    </Text>
+                  </Flex>
 
-              <Flex direction='column'>
-                <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Developer</Text>
-                <Text fontSize='14px' mb='8px'>
-                  Developer: PT. KELUARGA SEJAHTERA PROPERTINDO
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Agent: Ansos
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  No Surat: SPR/05718/GRIN/8307
-                </Text>
-              </Flex>
+                  <Flex direction='column'>
+                    <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Developer</Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Developer: {spr.developer.nama_developer}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Agent: {spr.developer.agent}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      No Surat: {spr.developer.nomor_surat}
+                    </Text>
+                  </Flex>
 
-              <Flex direction='column'>
-                <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Unit</Text>
-                <Text fontSize='14px' mb='8px'>
-                  Tipe: Type F0
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Blok: No.2 Nb.F
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Luas Tanah: 30 m2
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Perumahan: Griva Indaa
-                </Text>
-              </Flex>
+                  <Flex direction='column'>
+                    <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Unit</Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Tipe: {spr.unit.tipe}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Blok: {spr.unit.blok}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Luas Tanah: {spr.unit.luas_tanah}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Perumahan: {spr.unit.perumahan}
+                    </Text>
+                  </Flex>
 
-              <Flex direction='column'>
-                <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Rincian Harga</Text>
-                <Text fontSize='14px' mb='8px'>
-                  Harga Kredit: Rp 900.000.000
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Cara Pembayaran: Tunai / Kredit
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Harga Jual: Rp 550.000.000
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Diskon: Rp %0.000.000
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Harga Bersih: 
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  KPR Max: 00-000 000
-                </Text>
-                <Text fontSize='14px' mb='8px'>
-                  Uang Muka: Rp 100.000.000
-                </Text>
-              </Flex>
-            </Stack>
-          </DrawerBody>
+                  <Flex direction='column'>
+                    <Text fontSize='18px' fontWeight='semibold' textTransform='uppercase' mb='12px'>Rincian Harga</Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Harga Kredit: {spr.price.harga_kredit}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Cara Pembayaran: {spr.price.cara_pembayaran}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Harga Jual: {spr.price.harga_jual}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Diskon: {spr.price.diskon}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Harga Bersih: {spr.price.harga_bersih}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      KPR Max: {spr.price.kpr_max}
+                    </Text>
+                    <Text fontSize='14px' mb='8px'>
+                      Uang Muka: {spr.price.uang_muka}
+                    </Text>
+                  </Flex>
+                </Stack>
+              </DrawerBody>
+            )
+          }
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>
