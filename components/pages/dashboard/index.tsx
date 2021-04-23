@@ -110,7 +110,7 @@ const DashboardPage = () => {
                     </Tr>
                   )) : (
                     <Flex width='100%' p={8} alignItems='center' justifyContent='center'>
-                      Please Wait
+                      No Data
                     </Flex>
                   )
               }
